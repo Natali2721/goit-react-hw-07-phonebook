@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Title = styled.h1`
   color: ${p => p.theme.colors.accent};
   font-family: ${p => p.theme.fonts.body};
-  font-size: ${p => p.theme.fontSizes.l};
+  font-size: ${p => p.theme.fontSizes.m};
   padding-top: ${p => p.theme.space[2]}px;
   padding-bottom: ${p => p.theme.space[2]}px;
   margin-top: ${p => p.theme.space[4]}px;
@@ -13,7 +13,7 @@ const Title = styled.h1`
 const TitleSecond = styled.h2`
   color: ${p => p.theme.colors.accent};
   font-family: ${p => p.theme.fonts.body};
-  font-size: ${p => p.theme.fontSizes.m};
+  font-size: ${p => p.theme.fontSizes.s};
   padding-top: ${p => p.theme.space[2]}px;
   padding-bottom: ${p => p.theme.space[2]}px;
   margin-top: ${p => p.theme.space[4]}px;
@@ -22,7 +22,7 @@ const TitleSecond = styled.h2`
 const P = styled.p`
   color: ${p => p.theme.colors.black};
   font-family: ${p => p.theme.fonts.body};
-  font-size: ${p => p.theme.fontSizes.m};
+  font-size: ${p => p.theme.fontSizes.s};
   padding-top: 0px;
   padding-bottom: 0px;
   margin: 0px;
@@ -42,10 +42,10 @@ const Form = styled.form`
   flex-direction: column;
 `;
 const Button = styled.button`
-  padding: 10px 15px;
+  padding: 8px 12px;
   margin-right: auto;
   margin-top: ${p => p.theme.space[4]}px;
-  font-size: 16px;
+  font-size: 12px;
   background-color: transparent;
   border: 1px black solid;
   border-radius: 10px;
@@ -54,7 +54,9 @@ const Button = styled.button`
   transition: background-color 250ms linear;
   &:hover {
     color: white;
-    background-color: blue;
+    background-color: ${p => p.theme.colors.accent};
+    border-color: transparent;
+    transform: scale(1.1);
   }
 `;
 
