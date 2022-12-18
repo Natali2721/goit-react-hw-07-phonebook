@@ -1,6 +1,9 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/phonebookSlice';
+
+import {
+  useGetContactsQuery,
+  useAddContactMutation,
+} from '../../redux/contactsApi';
 import { nanoid } from 'nanoid';
 import ButtonAdd from 'components/ContactForm/ButtonAdd';
 import ContactForm from 'components/ContactForm/ContactForm';
@@ -9,12 +12,13 @@ import InputTel from 'components/ContactForm/InputTel';
 import { LabelContact } from 'components/ContactForm/LabelContact';
 
 export const Phonebook = () => {
-  const contacts = useSelector(state => state.contacts);
+  const { data } = useGetContactsQuery();
+  const [addContact] = useAddContactMutation();
+
   const [userName, setUserName] = useState('');
   const [number, setNumber] = useState('');
   const nameInputId = nanoid();
   const numberInputId = nanoid();
-  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -31,18 +35,17 @@ export const Phonebook = () => {
     setNumber('');
   };
 
-  const addContactHandle = data => {
-    const id = nanoid(7);
-    data.id = id;
-    console.log(data);
-    contacts.filter(contact => contact.userName === data.userName).length > 0
-      ? alert(`${userName} is already in contacts.`)
-      : dispatch(addContact({ userName, number, id }));
-  };
-
-  const clickOnBtnAdd = e => {
+  const clickOnBtnAdd = async e => {
     e.preventDefault();
-    addContactHandle({ userName, number });
+
+    try {
+      data.find(contact => contact.userName === userName)
+        ? alert(`${userName} is already in contacts.`)
+        : await addContact({ userName, number });
+    } catch (error) {
+      console.log(error);
+    }
+
     reset();
     // console.log(this.state);
   };
