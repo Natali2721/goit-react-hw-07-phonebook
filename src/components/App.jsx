@@ -3,6 +3,7 @@ import { H1, H2 } from './Title/Title';
 import { ContactList } from './ContactList/ContactList';
 import { Phonebook } from './Phonebook/Phonebook';
 import { Filter } from './Filter/Filter';
+import toast, { Toaster } from 'react-hot-toast';
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
       <H2 title="Contacts" />
       <Filter title="Find contact by name" />
       <ContactList />
+      <Toaster />
     </Box>
   );
 };
