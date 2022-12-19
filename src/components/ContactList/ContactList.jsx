@@ -1,22 +1,13 @@
-import {
-  Button,
-  ContactItem,
-  Contacts,
-  ContactTxt,
-} from 'components/Style/Element.styled';
-import { FaUserAlt } from 'react-icons/fa';
+import { Contacts } from 'components/Style/Element.styled';
+
 import { useSelector } from 'react-redux';
-import {
-  useDeleteContactMutation,
-  useGetContactsQuery,
-} from '../../redux/contactsApi';
+import { useGetContactsQuery } from '../../redux/contactsApi';
+import { ContactListItem } from './ContactListItem';
 
 export const ContactList = () => {
   const { data } = useGetContactsQuery();
   const searchFilter = useSelector(state => state.filter);
   const serchFilterToLowerCase = searchFilter.toLowerCase();
-
-  const deleteContact = useDeleteContactMutation();
 
   const getVisibleContacts = () => {
     if (searchFilter !== '') {
@@ -35,17 +26,7 @@ export const ContactList = () => {
     <Contacts>
       {visibleContacts &&
         visibleContacts.map(contact => {
-          return (
-            <ContactItem key={contact.id}>
-              <FaUserAlt />
-              <ContactTxt>
-                {contact.userName} : {contact.number}
-              </ContactTxt>
-              <Button type="button" onClick={() => deleteContact(contact.id)}>
-                Delete
-              </Button>
-            </ContactItem>
-          );
+          return <ContactListItem key={contact.id} {...contact} />;
         })}
     </Contacts>
   );
