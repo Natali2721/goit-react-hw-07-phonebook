@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { toast } from 'react-hot-toast';
 import {
   useGetContactsQuery,
   useAddContactMutation,
@@ -40,14 +40,13 @@ export const Phonebook = () => {
 
     try {
       data.find(contact => contact.userName === userName)
-        ? alert(`${userName} is already in contacts.`)
+        ? toast.error(`${userName} is already in contacts.`)
         : await addContact({ userName, number });
     } catch (error) {
       console.log(error);
     }
 
     reset();
-    // console.log(this.state);
   };
 
   return (
